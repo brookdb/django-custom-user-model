@@ -1,0 +1,22 @@
+{% load static from static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="stylesheet" href="{% static 'styles/test_style.css' %}">
+  </head>
+  <body>
+    <div class="warapper">
+      <!--  include 'components/header.html'  -->
+      <div id="mainView">
+
+      {% block content %}
+
+      {% endblock %}
+      </div>
+    </div>
+    <!-- script src=" static 'scripts/app.js' " type="text/javascript"></script -->
+  </body>
+</html>
