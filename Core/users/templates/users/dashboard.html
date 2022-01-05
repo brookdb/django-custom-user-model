@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="login-wrapper">
+  <h1> Dashboard</h1>
+  <p>Welcom {{ user.first_name }}</p>
+  <p>{{ user.email }}</p>
+</div>
+{% endblock %}

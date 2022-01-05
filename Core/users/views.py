@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 from .models import CustomUser
 # Create your views here.
@@ -12,18 +14,30 @@ def signup_view(request):
             user = form.save()
             user.refresh_from_db()
             user.save()
-            return redirect('users:dashboard', user_id=user.id)
+            return redirect('users:login')
     else:
         form = CustomUserCreationForm()
     return render(request, 'users/signup.html', {'form': form})
 
 def login_view(request):
-    return HttpResponse('<h1>login  view</h1>')
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect('users:dashboard', user_id=user.id)
+    else:
+        form = AuthenticationForm()
+    return render(request, 'users/login.html', {'form': form})
 
 def logout_view(request):
-    return HttpResponse('<h1>Log out view</h1>')
-
+    if request.method == 'POST':
+        logout(request)
+        return redirect('users:login')
+@login_required(login_url="/users/login/")
 def dashboard_view(request, user_id):
     user = CustomUser.objects.get(id=user_id)
-    html_string='<h1>Dashboard view</h1><br><p>'+str(user.id) +'</p><p>Welcome '+ str(user.email)
-    return HttpResponse(html_string)
+    return render(request, 'users/dashboard.html', {'user': user})

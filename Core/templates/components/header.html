@@ -1,0 +1,35 @@
+<header class="warapper">
+  <h1> <a href="{% url 'landing' %}">Title</a></h1>
+  <div class="wrapper">
+    <div class="burger">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+    </div>
+  </div>
+
+</header>
+<nav>
+  <div class="nav-options">
+    <!-- a href="#">REOURCE</a -->
+    {% if user.is_authenticated %}
+    <a href="{% url 'users:dashboard' user.id %}">DASHBOARD</a>
+    <br>
+    <br>
+    <form class="logout-link" action="{% url 'users:logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    <br>
+    <br>
+    <div class="wrapper">
+      <a href="{% url 'users:login' %}">Login</a>
+      <a href="{% url 'users:signup' %}">Signup</a>
+    </div>
+    {% endif %}
+    <div class="social-media">
+
+    </div>
+  </div>
+</nav>

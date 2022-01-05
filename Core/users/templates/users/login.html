@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="login-wrapper">
+  <h1> Log in </h1>
+  <form class="login-form" action="{% url 'users:login' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    {% if request.GET.next %}
+      <input type="hidden" name="next" value="{{ request.GET.next }}">
+    {% endif %}
+    <br>
+    <br>
+    <input class="login-button" type="submit" name="" value="login">
+  </form>
+</div>
+{% endblock %}
