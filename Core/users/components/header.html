@@ -1,0 +1,37 @@
+<header class="warapper">
+  <h1> <a href="{% url 'landing' %}">Specialty Coffee Database</a></h1>
+  <div class="wrapper">
+    <div class="burger">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+    </div>
+  </div>
+
+</header>
+<nav>
+  <div class="nav-options">
+    <a href="{% url 'about' %}">ABOUT</a>
+    <a href="{% url 'roast:roast_landing'%}">ROAST</a>
+    <!-- a href="#">REOURCE</a -->
+    {% if user.is_authenticated %}
+    <a href="#">DASHBOARD</a>
+    <br>
+    <br>
+    <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    <br>
+    <br>
+    <div class="wrapper">
+      <a href="{% url 'accounts:login' %}">Login</a>
+      <a href="{% url 'accounts:signup' %}">Signup</a>
+    </div>
+    {% endif %}
+    <div class="social-media">
+
+    </div>
+  </div>
+</nav>

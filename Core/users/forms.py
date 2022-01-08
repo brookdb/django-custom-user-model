@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordResetForm
 from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):
@@ -23,5 +23,14 @@ class CustomUserChangeForm(UserChangeForm):
         labels = {
             'first_name': 'First name',
             'last_name': 'Last name',
+            'email': 'Email',
+        }
+
+class CustomPasswordResetForm(PasswordResetForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('email',)
+        labels = {
             'email': 'Email',
         }
