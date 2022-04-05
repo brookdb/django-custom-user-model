@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<div class="login-wrapper">
+<div class="wrapper">
   <h1> Log in </h1>
   <form class="login-form" action="{% url 'users:login' %}" method="post">
     {% csrf_token %}

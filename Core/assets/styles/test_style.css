@@ -1,3 +1,19 @@
 body {
   background: blue;
 }
+.navbar-nav>li>a {
+  font-size: 15pt;
+}
+.navbar-header>a{
+  font-size: 15pt;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.shift-left{
+  margin-left: -166.6px !important;
+}
+.nav-container{
+  display: flex;
+  justify-content: space-between;
+}

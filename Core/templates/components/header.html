@@ -1,35 +1,33 @@
-<header class="warapper">
-  <h1> <a href="{% url 'landing' %}">Title</a></h1>
-  <div class="wrapper">
-    <div class="burger">
-          <div class="bar1"></div>
-          <div class="bar2"></div>
-          <div class="bar3"></div>
+<nav class="navbar">
+  <div class="container-fluid nav-container">
+    <div class="navbar-header shift-left">
+      <a href="{% url 'landing' %}">Title</a>
     </div>
-  </div>
+    <ul class="nav navbar-nav">
+      <!-- a href="#">REOURCE</a -->
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'users:dashboard' user.id %}">DASHBOARD</a></li>
+      {% endif %}
+      <li><a href="#">Link 2</a></li>
+      <li><a href="#">Link 3</a></li>
 
-</header>
-<nav>
-  <div class="nav-options">
-    <!-- a href="#">REOURCE</a -->
+      <li class="social-media">
+        <a href="#">Social Media Links</a>
+      </li>
+      <br>
+    </ul>
     {% if user.is_authenticated %}
-    <a href="{% url 'users:dashboard' user.id %}">DASHBOARD</a>
-    <br>
-    <br>
-    <form class="logout-link" action="{% url 'users:logout' %}" method="post">
-      {% csrf_token %}
-      <button type="submit">Logout</button>
-    </form>
+      <form class="logout-link" action="{% url 'users:logout' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger navbar-btn" type="submit">Logout</button>
+      </form>
     {% else %}
-    <br>
-    <br>
-    <div class="wrapper">
-      <a href="{% url 'users:login' %}">Login</a>
-      <a href="{% url 'users:signup' %}">Signup</a>
-    </div>
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'users:login' %}">Login</a></li>
+        <li><a href="{% url 'users:signup' %}">Signup</a></li>
+      </ul>
     {% endif %}
-    <div class="social-media">
 
-    </div>
+
   </div>
 </nav>
